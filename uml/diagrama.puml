@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam style strictuml
+skinparam classBackgroundColor White
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+class Pessoa {
+  + elogiarCentralSinistros(mensagem : String) : String
+  + reclamarCentralSinistros(mensagem : String) : String
+  + sugerirCentralSinistros(mensagem : String) : String
+}
+
+class Segurado {
+}
+
+class Ouvidoria {
+  - instancia : Ouvidoria
+  + getInstancia() : Ouvidoria
+  + receberElogioCentralSinistros(mensagem : String) : String
+  + receberReclamacaoCentralSinistros(mensagem : String) : String
+  + receberSugestaoCentralSinistros(mensagem : String) : String
+}
+
+interface Setor <<interface>> {
+  + receberReclamacao(mensagem : String) : String
+  + receberElogio(mensagem : String) : String
+  + receberSugestao(mensagem : String) : String
+}
+
+class CentralSinistros {
+  - instancia : CentralSinistros
+  + getInstancia() : CentralSinistros
+}
+
+Pessoa <|-- Segurado
+Pessoa ..> Ouvidoria
+Ouvidoria ..> CentralSinistros
+Setor <|.. CentralSinistros
+@enduml
